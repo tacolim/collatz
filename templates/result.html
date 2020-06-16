@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fun With Collatz {NUMBER}</title>
+</head>
+<body>
+    <h3>Number to check Collatz conjecture: {{initialNumber}}</h3>
+    <h4>Numbers List: </h4>
+    <ul>
+        {% for num in numNowListString %}
+             <li>{{num}}</li>
+        {% endfor %}
+    </ul>
+    <h4>Loop Count: {{loopCountString}}</h4>
+    <h4>Final Number: {{finalNumString}}</h4>
+
+</body>
+</html>
