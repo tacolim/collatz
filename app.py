@@ -1,6 +1,5 @@
 import os
-from string import Template
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 from model import SingleIntegerInput
 
 
@@ -22,19 +21,30 @@ app.config.update(dict(
 @app.route('/', methods=['GET', 'POST'])
 def hello():
     form = SingleIntegerInput(request.form)
+    if form.validate_on_submit():
+        integer = request.form['YourInteger']
+        print(f'integer inside hello_next_thing: {integer}', file=sys.stderr)
+        return redirect(url_for(f'/{integer}'))
     return render_template("view.html", form=form)
 
 
-@app.route('/<some_collatz>')
+@app.route('/<some_collatz>', methods=['GET', 'POST'])
 def hello_next_thing(some_collatz):
+    form = SingleIntegerInput(request.form)
     thisCollatz = Collatz(some_collatz)
     thisCollatz.collatz()
     intialNumberString = str(thisCollatz.getInitialNumber())
     numNowListString = thisCollatz.getNumberNowList()
     loopCountString = str(thisCollatz.getLoopCount())
     finalNumString = str(thisCollatz.getFinalNumber())
+    # replace this with an insert into whatever database you're using
+    if form.validate_on_submit():
+        integer = request.form['YourInteger']
+        print(f'integer inside hello_next_thing: {integer}', file=sys.stderr)
+        return redirect(url_for(f'/{integer}'))
+
     return render_template("result.html", initialNumber=intialNumberString, numNowListString=numNowListString,
-                           loopCountString=loopCountString, finalNumString=finalNumString)
+                           loopCountString=loopCountString, finalNumString=finalNumString, form=form)
 
 
 if __name__ == '__main__':
