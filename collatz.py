@@ -22,7 +22,6 @@ class Collatz:
             else:
                 numberNow = numberNow / 2
 
-            # print(f'\tnumber now: {numberNow}')
             count = count + 1
 
             if numberNow in [largest, 1]:
