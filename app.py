@@ -1,51 +1,48 @@
-import os
-from flask import Flask, render_template, request, redirect, url_for
-from model import SingleIntegerInput
-
+from flask import Flask, render_template, request
 
 from collatz import Collatz
 
+app = Flask(__name__)
 
-app = Flask(__name__, instance_relative_config=True)
-
-SECRET = os.urandom(64)
-WTF_SECRET = os.urandom(64)
-
-app.config.update(dict(
-    SECRET_KEY=SECRET,
-    WTF_CSRF_SECRET_KEY=WTF_SECRET
-))
+@app.route('/')
+def main():
+    return render_template('app.html')
 
 
-# a simple page that has our form
-@app.route('/', methods=['GET', 'POST'])
-def hello():
-    form = SingleIntegerInput(request.form)
-    if form.validate_on_submit():
-        integer = request.form['YourInteger']
-        print(f'integer inside hello_next_thing: {integer}', file=sys.stderr)
-        return redirect(url_for(f'/{integer}'))
-    return render_template("view.html", form=form)
+@app.route('/send', methods=['POST'])
+def send():
+    if request.method == 'POST':
+        num1 = request.form['num1']
+        thisCollatz = Collatz(num1)
+        thisCollatz.collatz()
+        initialNumberString = str(thisCollatz.getInitialNumber())
+        # numNowListString = thisCollatz.getNumberNowList()
+        # loopCountString = str(thisCollatz.getLoopCount())
+        finalNumString = str(thisCollatz.getFinalNumber())
+        return render_template('app.html', collatzNumInitial=initialNumberString, collatzNumFinal=finalNumString)
+
+        # num2 = request.form['num2']
+        # operation = request.form['operation']
+        #
+        # if operation == 'add':
+        #     sum = float(num1) + float(num2)
+        #     return render_template('app.html', sum=sum)
+        #
+        # elif operation == 'subtract':
+        #     sum = float(num1) - float(num2)
+        #     return render_template('app.html', sum=sum)
+        #
+        # elif operation == 'multiply':
+        #     sum = float(num1) * float(num2)
+        #     return render_template('app.html', sum=sum)
+        #
+        # elif operation == 'divide':
+        #     sum = float(num1) / float(num2)
+        #     return render_template('app.html', sum=sum)
+        # else:
+        #     return render_template('app.html')
 
 
-@app.route('/<some_collatz>', methods=['GET', 'POST'])
-def hello_next_thing(some_collatz):
-    form = SingleIntegerInput(request.form)
-    thisCollatz = Collatz(some_collatz)
-    thisCollatz.collatz()
-    intialNumberString = str(thisCollatz.getInitialNumber())
-    numNowListString = thisCollatz.getNumberNowList()
-    loopCountString = str(thisCollatz.getLoopCount())
-    finalNumString = str(thisCollatz.getFinalNumber())
-    # replace this with an insert into whatever database you're using
-    if form.validate_on_submit():
-        integer = request.form['YourInteger']
-        print(f'integer inside hello_next_thing: {integer}', file=sys.stderr)
-        return redirect(url_for(f'/{integer}'))
-
-    return render_template("result.html", initialNumber=intialNumberString, numNowListString=numNowListString,
-                           loopCountString=loopCountString, finalNumString=finalNumString, form=form)
-
-
-if __name__ == '__main__':
-    app.run(use_reloader=True, debug=True)
+if __name__ == ' __main__':
+    app.debug = True
+    app.run()
