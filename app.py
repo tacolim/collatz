@@ -3,6 +3,7 @@ from flask import Flask, render_template, request
 from collatz import Collatz
 
 app = Flask(__name__)
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 @app.route('/')
 def main():
@@ -16,10 +17,11 @@ def send():
         thisCollatz = Collatz(num1)
         thisCollatz.collatz()
         initialNumberString = str(thisCollatz.getInitialNumber())
-        # numNowListString = thisCollatz.getNumberNowList()
-        # loopCountString = str(thisCollatz.getLoopCount())
+        numNowListString = thisCollatz.getNumberNowList()
+        loopCountString = str(thisCollatz.getLoopCount())
         finalNumString = str(thisCollatz.getFinalNumber())
-        return render_template('app.html', collatzNumInitial=initialNumberString, collatzNumFinal=finalNumString)
+        return render_template('app.html', collatzNumInitial=initialNumberString, collatzList=numNowListString,
+                               collatzLoop=loopCountString, collatzNumFinal=finalNumString)
 
         # num2 = request.form['num2']
         # operation = request.form['operation']

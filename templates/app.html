@@ -5,62 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Collatz Calculator</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css"
-    />
-
-    <style>
-      .alert {
-        background: green;
-        padding: 1rem;
-        border-radius: 5px;
-        color: white;
-        margin: 1rem;
-      }
-    </style>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
+<!--    the below is how you link to a JS script which also needs to live in static folder-->
+<!--    <script src="{{ url_for('static',filename='javascriptFileName.js') }}"> </script>-->
   </head>
   <body>
-    <div class="container">
-      <h3>Colltaz Calculator</h3>
+    <div class="title">
+      Colltaz Calculator
     </div>
 
     <!-- Form -->
-    <div class="container">
+    <div class="collatzContent">
       <form action="/send" method="POST">
-        <label for="Number">Enter Integer</label>
         <input
           type="text"
-          placeholder="Integer"
-          class="u-full-width"
+          placeholder="Enter Integer"
           name="num1"
         />
-
-<!--        <label for="Number Two">Second Number</label>-->
-<!--        <input-->
-<!--          type="text"-->
-<!--          placeholder="Second Number"-->
-<!--          class="u-full-width"-->
-<!--          name="num2"-->
-<!--        />-->
-
-<!--        <label for="Operation">Operation</label>-->
-<!--        <select class="u-full-width" name="operation">-->
-<!--          <option value="add">Add</option>-->
-<!--          <option value="subtract">Subtract</option>-->
-<!--          <option value="multiply">Multiply</option>-->
-<!--          <option value="divide">Divide</option>-->
-<!--        </select>-->
-
         <input type="submit" value="Calculate Collatz" id="calc_btn" />
         <br />
+        <div class="alert">
+          Final Number: {{ collatzNumFinal }}
+        </div>
         <div class="alert">
           Initial Number: {{ collatzNumInitial }}
         </div>
         <div class="alert">
-          Final Number: {{ collatzNumFinal }}
+          Collatz Sequence: {{ collatzList }}
+        </div>
+        <div class="alert">
+          Loop Count: {{ collatzLoop }}
         </div>
       </form>
+    </div>
+
+    <div class="definition">
+        <p>The Collatz conjecture is an unsolved problem in mathematics.</p>
+        <p>The theory is that starting with a positive integer and putting it through a set sequence it will always terminate back down to 1.</p>
+        <p>The sequence is: until terminus, if the number is even divide by 2. If it's odd multiply by 3 and add 1.</p>
+        <p>Negative integers behave similarly, they always terminate with a repeating sequence less than zero.</p>
+        <p>For more details check out:
+          <a href="https://en.wikipedia.org/wiki/Collatz_conjecture" target="_blank">Collatz conjecture</a> (Wikipedia)
+          and <a href="https://mathworld.wolfram.com/CollatzProblem.html" target="_blank">Collatz Problem</a> (Wolfram).
+        </p>
+        <p>Enter an integer below to check out a Collatz Sequence in action.</p>
     </div>
   </body>
 </html>

@@ -1,0 +1,40 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #bcd9a3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    color: #1f4060;
+    font-size: 6vh;
+    padding: 2vh 0vh;
+}
+
+.definition {
+color: #1f4060;
+    background: #ecf2f9;
+    width: 60vh;
+    align-self: center;
+    padding: 0vh 2vh;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.collatzContent {
+    display: flex;
+    justify-content: center;
+}
+
+.alert {
+    background: #1f4060;
+    padding: 0.5rem;
+    border-radius: 5px;
+    color: white;
+    margin: 1rem;
+}
