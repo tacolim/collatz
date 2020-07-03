@@ -32,6 +32,7 @@ class Collatz:
 
         self.loopCount = count
         self.final = int(numberNow)
+        self.numberNowList.append(int(numberNow))
 
     def getInitialNumber(self):
         return self.initialNumber
