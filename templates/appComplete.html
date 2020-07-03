@@ -16,19 +16,21 @@
 
     <!-- Form -->
     <div class="collatzContent">
-      <form action="/send" method="POST">
+      <form action="/collatzComplete" method="POST">
         <input
           type="text"
           placeholder="Enter Integer"
           name="num1"
         />
         <input type="submit" value="Calculate Collatz" id="calc_btn" />
-        <br />
-        <div class="alert">
-          Final Number: {{ collatzNumFinal }}
-        </div>
+
+      </form>
+      <div id="output">
         <div class="alert">
           Initial Number: {{ collatzNumInitial }}
+        </div>
+        <div class="alert">
+          Final Number: {{ collatzNumFinal }}
         </div>
         <div class="alert">
           Collatz Sequence: {{ collatzList }}
@@ -36,10 +38,11 @@
         <div class="alert">
           Loop Count: {{ collatzLoop }}
         </div>
-      </form>
+      </div>
     </div>
 
     <div class="definition">
+        <h2>Collatz Conjecture</h2>
         <p>The Collatz conjecture is an unsolved problem in mathematics.</p>
         <p>The theory is that starting with a positive integer and putting it through a set sequence it will always terminate back down to 1.</p>
         <p>The sequence is: until terminus, if the number is even divide by 2. If it's odd multiply by 3 and add 1.</p>
@@ -48,7 +51,13 @@
           <a href="https://en.wikipedia.org/wiki/Collatz_conjecture" target="_blank">Collatz conjecture</a> (Wikipedia)
           and <a href="https://mathworld.wolfram.com/CollatzProblem.html" target="_blank">Collatz Problem</a> (Wolfram).
         </p>
-        <p>Enter an integer below to check out a Collatz Sequence in action.</p>
+        <h4>Enter an integer above to check out a Collatz Sequence in action.</h4>
     </div>
+
+    <section id="footer">
+        <div class="copyright">
+            <div>&copy; <a href="cassidyavery.com" target="_blank">Cassidy SN Avery</a>. All rights reserved.</div>
+        </div>
+    </section>
   </body>
 </html>
