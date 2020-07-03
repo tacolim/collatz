@@ -2,7 +2,7 @@
 
 ---
 
-##Collatz Conjecture
+## Collatz Conjecture
 The Collatz conjecture is an unsolved problem in mathematics. 
 
 The theory is that starting with a positive integer and putting it through a set sequence it will always terminate back down to 1. 
@@ -18,7 +18,7 @@ and [Collatz Problem](https://mathworld.wolfram.com/CollatzProblem.html) (Wolfra
 
 ---
 
-###Technologies
+### Technologies
 * Flask
 * Python
 * HTML
