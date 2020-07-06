@@ -16,6 +16,10 @@
 
     <!-- Form -->
     <div class="collatzContent">
+        {% if message %}
+        <p class="warning"><span>Heads Up! </span>{{ message }}</p>
+        {% endif %}
+
       <form action="/collatzComplete" method="POST">
         <input
           type="text"
