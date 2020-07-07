@@ -7,13 +7,18 @@ app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 @app.route('/')
 def main():
-    return render_template('appInitial.html')
+    return render_template('appInitial.html', message=None)
 
 
 @app.route('/collatzComplete', methods=['POST'])
 def collatz_complete():
     if request.method == 'POST':
         num1 = request.form['num1']
+        try:
+            val = int(num1)
+        except ValueError:
+            return render_template('appInitial.html', message="Please input an Integer and try again")
+
         thisCollatz = Collatz(num1)
         thisCollatz.collatz()
         initialNumberString = str(thisCollatz.getInitialNumber())
@@ -22,27 +27,6 @@ def collatz_complete():
         finalNumString = str(thisCollatz.getFinalNumber())
         return render_template('appComplete.html', collatzNumInitial=initialNumberString, collatzList=numNowListString,
                                collatzLoop=loopCountString, collatzNumFinal=finalNumString)
-
-        # num2 = request.form['num2']
-        # operation = request.form['operation']
-        #
-        # if operation == 'add':
-        #     sum = float(num1) + float(num2)
-        #     return render_template('app.html', sum=sum)
-        #
-        # elif operation == 'subtract':
-        #     sum = float(num1) - float(num2)
-        #     return render_template('app.html', sum=sum)
-        #
-        # elif operation == 'multiply':
-        #     sum = float(num1) * float(num2)
-        #     return render_template('app.html', sum=sum)
-        #
-        # elif operation == 'divide':
-        #     sum = float(num1) / float(num2)
-        #     return render_template('app.html', sum=sum)
-        # else:
-        #     return render_template('app.html')
 
 
 if __name__ == ' __main__':

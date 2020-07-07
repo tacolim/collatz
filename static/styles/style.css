@@ -23,6 +23,15 @@ body {
     padding: 2vh 0vh;
 }
 
+.warning {
+    color: fuchsia;
+    font-weight: bolder;
+}
+
+.warning span {
+    font-variant: small-caps;
+}
+
 form {
     display: flex;
     flex-direction: column;
